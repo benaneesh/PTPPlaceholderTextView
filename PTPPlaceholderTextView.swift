@@ -53,10 +53,10 @@ import UIKit
     set {
       super.attributedText = newValue
       
-      if let attributedText = attributedText where attributedText.length > 0 && !isInRenderingPlaceholderProcess && !isPlaceholderActive {
-        let attributes = attributedText.attributesAtIndex(0, effectiveRange: nil)
+      if let attributedText = attributedText, attributedText.length > 0 && !isInRenderingPlaceholderProcess && !isPlaceholderActive {
+        let attributes = attributedText.attributes(at: 0, effectiveRange: nil)
         // Set the text color property with the foreground color attribute of the first character, this is a mimic the default behavior of UITextView.
-        self.actualTextColor = attributes[NSForegroundColorAttributeName] as? UIColor ?? UIColor.blackColor()
+        self.actualTextColor = attributes[NSForegroundColorAttributeName] as? UIColor ?? UIColor.black
       }
       
       if !isInRenderingPlaceholderProcess {
@@ -71,7 +71,7 @@ import UIKit
   // MARK: - Methods
   private func renderPlaceholderText() {
     // We don't render placeholder while this text view is the first responder.
-    guard !self.isFirstResponder() else {
+    guard !self.isFirstResponder else {
       return
     }
     
